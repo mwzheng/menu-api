@@ -1,7 +1,11 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const connectDb = require('./config/db');
 
 dotenv.config({ path: './config/config.env' });
+
+// Connect to MongoDb Atlas
+connectDb();
 
 const app = express();
 
