@@ -4,6 +4,7 @@
   "description": "Practice making a REST API using Express and Node.Js",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "devStart": "nodemon server.js"
   },
   "author": "mZheng",
