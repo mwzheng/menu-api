@@ -21,13 +21,49 @@ exports.getFoods = async (req, res, next) => {
     }
 }
 
+// Method: GET
+// Route: /api/v1/foods/name/:type
+// Description: Finds all food items with name to the db
+exports.findFoodsByName = async (req, res, next) => {
+    try {
+        const foods = await Food.find({ name: req.params.name })
+
+        return res.status(200).json({
+            success: true,
+            foods: foods
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            error: "Server error"
+        })
+    }
+}
+
+// Method: GET
+// Route: /api/v1/foods/type/:type
+// Description: Finds all food items with given type to the db
+exports.findFoodsByType = async (req, res, next) => {
+    try {
+        const foods = await Food.find({ type: req.params.type })
+
+        return res.status(200).json({
+            success: true,
+            foods: foods
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            error: "Server error"
+        })
+    }
+}
+
 // Method: POST
 // Route: /api/v1/foods
 // Description: Adds a new food item to the db
 exports.addFood = async (req, res, next) => {
     try {
-        const { type, name, ingredients, cost, calories, isVegan } = req.body;
-
         const newFoodEntry = await Food.create(req.body);
 
         return res.status(201).json({
@@ -51,6 +87,25 @@ exports.addFood = async (req, res, next) => {
     }
 }
 
+// Method: PATCH
+// Route: /api/v1/foods/:id
+// Description: Updates the food item with the given id from db
+exports.updateFood = async (req, res, next) => {
+    try {
+        const updated = await Food.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
+
+        return res.status(200).json({
+            success: true,
+            updatedItem: updated
+        });
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            error: "Error updating food"
+        });
+    }
+}
+
 // Method: DELETE
 // Route: /api/v1/foods/:id
 // Description: Deletes the food item with the given id from db
@@ -71,11 +126,11 @@ exports.deleteFood = async (req, res, next) => {
         return res.status(200).json({
             success: true,
             foodRemoved: foodToRemove
-        })
+        });
     } catch (error) {
         return res.status(500).json({
             success: false,
             error: "Error deleting food"
-        })
+        });
     }
 }

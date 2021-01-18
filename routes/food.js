@@ -1,5 +1,5 @@
 const express = require('express');
-const { getFoods, addFood, deleteFood } = require('../controllers/food.js');
+const { getFoods, addFood, deleteFood, updateFood, findFoodsByName, findFoodsByType } = require('../controllers/food.js');
 const router = express.Router();
 
 router
@@ -10,5 +10,14 @@ router
 router
     .route('/:id')
     .delete(deleteFood)
+    .patch(updateFood)
+
+router
+    .route('/name/:name')
+    .get(findFoodsByName)
+
+router
+    .route('/type/:type')
+    .get(findFoodsByType)
 
 module.exports = router;
