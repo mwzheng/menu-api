@@ -2,7 +2,7 @@ const Food = require('../models/Food');
 
 // Method: GET
 // Route: /api/v1/foods
-// Description: Returns all food items within the db
+// Description: Returns a list of all food items within the db
 exports.getFoods = async (req, res, next) => {
     try {
         // Get all food items from db
@@ -51,14 +51,31 @@ exports.addFood = async (req, res, next) => {
     }
 }
 
-
 // Method: DELETE
 // Route: /api/v1/foods/:id
 // Description: Deletes the food item with the given id from db
 exports.deleteFood = async (req, res, next) => {
     try {
+        const foodId = req.params.id;
+        const foodToRemove = await Food.findById(foodId);
 
+        if (!foodToRemove) {
+            return res.status(404).json({
+                success: false,
+                error: `Food item with id ${foodId} not found`
+            });
+        }
+
+        await foodToRemove.remove();
+
+        return res.status(200).json({
+            success: true,
+            foodRemoved: foodToRemove
+        })
     } catch (error) {
-
+        return res.status(500).json({
+            success: false,
+            error: "Error deleting food"
+        })
     }
 }
