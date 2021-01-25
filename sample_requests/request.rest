@@ -1,0 +1,70 @@
+# Gets all of the food items currently in db
+GET http://localhost:5000/api/v1/foods
+
+###
+
+# Adds an item to the db
+POST  http://localhost:5000/api/v1/foods
+Content-Type: application/json
+
+{
+    "type": "dessert",
+    "name": "Ice-cream",
+    "cost": 5.00,
+    "ingredients": ["Flour", "Egg", "Sugar"],
+    "calories": 340,
+    "isVegan": false
+}
+
+###
+
+# Adds an item to the db
+POST  http://localhost:5000/api/v1/foods
+Content-Type: application/json
+
+{
+    "type": "dessert",
+    "name": "Cake",
+    "cost": 5.00,
+    "ingredients": ["Flour", "Egg", "Sugar"],
+    "calories": 340,
+    "isVegan": false
+}
+
+###
+
+# Adds an item to the db
+POST  http://localhost:5000/api/v1/foods
+Content-Type: application/json
+
+{
+    "type": "drink",
+    "name": "Bottled Water",
+    "cost": 1.00,
+    "ingredients": ["Water"],
+    "calories": 0,
+    "isVegan": false
+}
+
+###
+
+# Deletes the food item with id: 600f0f46eb5722d69263d2a1
+DELETE http://localhost:5000/api/v1/foods/600f0f46eb5722d69263d2a1
+
+###
+
+# Update the name/cost/type of the item with id: 6006042f7f23ff80a33b3d8f
+PATCH http://localhost:5000/api/v1/foods/6006042f7f23ff80a33b3d8f
+Content-Type: application/json
+
+{
+    "type": "Burger",
+    "name": "Cheese Burger",
+    "cost": 10.50
+}
+
+
+###
+
+# Get all the deserts from the db
+GET http://localhost:5000/api/v1/foods/type/drink
