@@ -92,7 +92,7 @@ exports.addFood = async (req, res, next) => {
 // Description: Updates the food item with the given id from db
 exports.updateFood = async (req, res, next) => {
     try {
-        const updated = await Food.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
+        const updated = await Food.findByIdAndUpdate(req.params.id, { $set: req.body }, { useFindAndModify: false, new: true });
 
         return res.status(200).json({
             success: true,
