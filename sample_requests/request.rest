@@ -67,4 +67,4 @@ Content-Type: application/json
 ###
 
 # Get all the deserts from the db
-GET http://localhost:5000/api/v1/foods/type/drink
+GET http://localhost:5000/api/v1/foods/type/dessert
